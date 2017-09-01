@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"/>
+
+    <FrameLayout
+        android:id="@+id/edittxtQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="@color/cardview_dark_background">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardview2"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card_view:cardCornerRadius="4dp"
+            android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/txtEnterCard"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:hint="Enter flash card content"
+                    android:maxLines="8"
+                    android:scrollbars="vertical"
+                    android:fadeScrollbars="true"/>
+
+            <ImageView
+                android:id="@+id/imageAddViewCard"
+                android:padding="10dp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:src="@drawable/color_wheel"
+                android:scaleType="centerInside"
+                android:visibility="gone"/>
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabAddCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="@dimen/margin_fab"
+                    android:src="@drawable/ic_content_add" />
+
+            </android.support.design.widget.CoordinatorLayout>
+
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+
+</LinearLayout>
