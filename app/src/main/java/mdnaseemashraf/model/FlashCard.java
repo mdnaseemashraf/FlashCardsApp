@@ -1,5 +1,6 @@
 package mdnaseemashraf.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -12,19 +13,26 @@ public class FlashCard {
     private String contextData;
     private String dateCreated;
 
+    private int foreColor;
+    private int backColor;
+
     private long id;
 
-    public FlashCard(String data, String contextData, String dateCreated) {
+    public FlashCard(String data, String contextData, String dateCreated, int foreColor, int backColor) {
         this.data = data;
         this.contextData = contextData;
         this.dateCreated = dateCreated;
+        this.foreColor = foreColor;
+        this.backColor = backColor;
     }
 
-    public FlashCard(long id, String data, String contextData, String dateCreated) {
+    public FlashCard(long id, String data, String contextData, String dateCreated, int foreColor, int backColor) {
         this.id = id;
         this.data = data;
         this.contextData = contextData;
         this.dateCreated = dateCreated;
+        this.foreColor = foreColor;
+        this.backColor = backColor;
     }
 
     public String getData() {
@@ -58,4 +66,22 @@ public class FlashCard {
     public void setId(long id) {
         this.id = id;
     }
+
+
+    public int getForeColor() {
+        return foreColor;
+    }
+
+    public void setForeColor(int foreColor) {
+        this.foreColor = foreColor;
+    }
+
+    public int getBackColor() {
+        return backColor;
+    }
+
+    public void setBackColor(int backColor) {
+        this.backColor = backColor;
+    }
+
 }

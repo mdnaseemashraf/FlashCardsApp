@@ -1,4 +1,4 @@
-package zoomtext;
+package mdnaseemashraf.colorpicker;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -32,7 +32,7 @@ public class ColorPickerDialog extends AlertDialog {
 
     }
 
-    private OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+    private OnClickListener onClickListener = new OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
             switch (which) {
             case BUTTON_POSITIVE:

@@ -37,18 +37,21 @@ import mdnaseemashraf.model.FlashCard;
 import mdnaseemashraf.model.FlashCardSQliteOpenHelper;
 import swipestack.SwipeStack;
 
-public class MainActivity extends AppCompatActivity implements SwipeStack.SwipeStackListener {
+public class OptimizedMainActivity extends AppCompatActivity implements SwipeStack.SwipeStackListener {
 
-    private Button mButtonLeft, mButtonRight;
     private FloatingActionButton mFab;
     private FloatingActionButton mFabEdit;
 
     private ArrayList<FlashCard> deck;
+    private ArrayList<FlashCard> buffer;
     private int deckIndex;
     private SwipeStack mSwipeStack;
     private SwipeStackAdapter mAdapter;
 
     boolean imgStat;
+    int limit = 5;
+    int start = 0;
+    int diff = 0;
 
     int foreground = Color.parseColor("#000000");
     int background = Color.parseColor("#FFFFFF");
@@ -59,12 +62,12 @@ public class MainActivity extends AppCompatActivity implements SwipeStack.SwipeS
         setContentView(R.layout.activity_main);
 
         deck = new ArrayList<FlashCard>();
+        buffer = new ArrayList<FlashCard>();
+
         deckIndex = 0;
         fillWithData(getApplicationContext());
 
         mSwipeStack = (SwipeStack) findViewById(R.id.swipeStack);
-        mButtonLeft = (Button) findViewById(R.id.buttonSwipeLeft);
-        mButtonRight = (Button) findViewById(R.id.buttonSwipeRight);
         mFab = (FloatingActionButton) findViewById(R.id.fabAdd);
         mFabEdit = (FloatingActionButton) findViewById(R.id.fabEdit);
 
@@ -76,19 +79,15 @@ public class MainActivity extends AppCompatActivity implements SwipeStack.SwipeS
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mAdapter = new SwipeStackAdapter(deck);
+        //mAdapter = new SwipeStackAdapter(deck);
+        mAdapter = new SwipeStackAdapter(buffer);
         mSwipeStack.setAdapter(mAdapter);
         mSwipeStack.setListener(this);
-
-        mButtonLeft.setEnabled(false);
-        mButtonRight.setEnabled(false);
-        mButtonLeft.setVisibility(View.GONE);
-        mButtonRight.setVisibility(View.GONE);
 
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+                Intent intent = new Intent(OptimizedMainActivity.this, AddCardActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements SwipeStack.SwipeS
             @Override
             public void onClick(View view) {
 
-                PopupMenu popup = new PopupMenu(MainActivity.this, findViewById(R.id.fabEdit));
+                PopupMenu popup = new PopupMenu(OptimizedMainActivity.this, findViewById(R.id.fabEdit));
                 popup.getMenuInflater().inflate(R.menu.edit_this_menu, popup.getMenu());
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -107,29 +106,29 @@ public class MainActivity extends AppCompatActivity implements SwipeStack.SwipeS
                             FlashCardSQliteOpenHelper helper = new FlashCardSQliteOpenHelper(getApplicationContext());
                             SQLiteDatabase database = helper.getWritableDatabase();
 
-                            helper.deleteCard(deck.get(deckIndex).getId(),database);
+                            helper.deleteCard(buffer.get(deckIndex).getId(),database);
 
-                            Intent inter = new Intent(MainActivity.this, MainActivity.class);
+                            Intent inter = new Intent(OptimizedMainActivity.this, OptimizedMainActivity.class);
                             startActivity(inter);
                             finish();
                         }
                         else if(item.getTitle().toString().equalsIgnoreCase("Edit")) {
                             boolean isPics = false;
-                            if(deck.get(deckIndex).getData().contains("Pic:"))
+                            if(buffer.get(deckIndex).getData().contains("Pic:"))
                             {
                                 isPics = true;
                             }
 
                             if((!isPics)&&(deckIndex != -1)){
 
-                                Intent intent = new Intent(MainActivity.this, EditCardActivity.class);
+                                Intent intent = new Intent(OptimizedMainActivity.this, EditCardActivity.class);
 
-                                intent.putExtra("id",deck.get(deckIndex).getId())
-                                        .putExtra("data",deck.get(deckIndex).getData())
-                                        .putExtra("context",deck.get(deckIndex).getContextData())
-                                        .putExtra("date",deck.get(deckIndex).getDateCreated())
-                                        .putExtra("fcolor",deck.get(deckIndex).getForeColor())
-                                        .putExtra("bcolor",deck.get(deckIndex).getBackColor());
+                                intent.putExtra("id",buffer.get(deckIndex).getId())
+                                        .putExtra("data",buffer.get(deckIndex).getData())
+                                        .putExtra("context",buffer.get(deckIndex).getContextData())
+                                        .putExtra("date",buffer.get(deckIndex).getDateCreated())
+                                        .putExtra("fcolor",buffer.get(deckIndex).getForeColor())
+                                        .putExtra("bcolor",buffer.get(deckIndex).getBackColor());
 
                                 startActivity(intent);
                                 finish();
@@ -157,7 +156,11 @@ public class MainActivity extends AppCompatActivity implements SwipeStack.SwipeS
         SQLiteDatabase database = helper.getWritableDatabase();
 
         deck = helper.fetchCards(database);
+
         deckIndex = 0;
+
+        for(int k=start; k<limit; k++)
+            buffer.add(deck.get(k));
     }
 
     /* NOTE: Add View.OnClickListener to Activity
@@ -201,12 +204,28 @@ public class MainActivity extends AppCompatActivity implements SwipeStack.SwipeS
     public void onViewSwipedToRight(int position) {
         String swipedElement = mAdapter.getItem(position).getData();
         deckIndex = position+1;
+
+        start = start+1;
+
+        if(limit+1<deck.size()){
+            limit = limit+1;
+        }
+        else{
+            limit = deck.size();
+        }
     }
 
     @Override
     public void onViewSwipedToLeft(int position) {
         String swipedElement = mAdapter.getItem(position).getData();
         deckIndex = position+1;
+
+        if(limit+1<deck.size()){
+            limit = limit+1;
+        }
+        else{
+            limit = deck.size();
+        }
     }
 
     @Override

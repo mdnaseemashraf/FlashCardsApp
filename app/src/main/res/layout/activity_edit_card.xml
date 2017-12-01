@@ -40,27 +40,25 @@
                     android:scrollbars="vertical"
                     android:fadeScrollbars="true"/>
 
-            <ImageView
-                android:id="@+id/imageAddViewCard"
-                android:padding="10dp"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:src="@drawable/color_wheel"
-                android:scaleType="centerInside"
-                android:visibility="gone"/>
-
             <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fabAddCard"
+                    android:id="@+id/fabSaveCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:layout_margin="@dimen/margin_fab"
-                    android:src="@drawable/ic_content_add" />
+                    android:src="@drawable/ic_save_white_48dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabDeleteCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="@dimen/margin_fab"
+                    android:src="@drawable/ic_delete_forever_white_48dp"/>
 
             </android.support.design.widget.CoordinatorLayout>
 

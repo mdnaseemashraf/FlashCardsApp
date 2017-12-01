@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package zoomtext;
+package mdnaseemashraf.colorpicker;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

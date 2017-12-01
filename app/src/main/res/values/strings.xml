@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SwipeStack</string>
+    <string name="app_name">FlashCard App</string>
 
     <string name="swipe_left">Swipe left</string>
     <string name="swipe_right">Swipe right</string>

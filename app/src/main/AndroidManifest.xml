@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     package="mdnaseemashraf.flashcardsapp">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +23,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".OptimizedMainActivity"/>
+        <activity android:name=".AboutActivity"/>
         <activity android:name=".AddCardActivity"/>
+        <activity android:name=".EditCardActivity"/>
 
     </application>
 

@@ -8,36 +8,21 @@
     android:clipChildren="false"
     tools:context="mdnaseemashraf.flashcardsapp.MainActivity">
 
-    <Button
-        android:id="@+id/buttonSwipeLeft"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="@string/swipe_left"/>
-
-    <Button
-        android:id="@+id/buttonSwipeRight"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/swipe_right"/>
-
     <swipestack.SwipeStack
         android:id="@+id/swipeStack"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/buttonSwipeLeft"
+        android:layout_alignParentBottom="true"
         android:padding="@dimen/padding_swipestack"
-        app:stack_rotation="10"
-        app:stack_size="3"/>
+        app:stack_rotation="9"
+        app:stack_size="3" />
+
+    <!--app:stack_rotation="10"-->
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabAdd"
@@ -47,6 +32,23 @@
             android:layout_margin="@dimen/margin_fab"
             android:src="@drawable/ic_content_add"
             app:fabSize="normal"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_margin="@dimen/margin_fab"
+            android:src="@drawable/ic_edit_white_48dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabMenu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/margin_fab"
+            android:src="@drawable/ic_help_white_48dp"
+            android:scaleType="fitXY"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

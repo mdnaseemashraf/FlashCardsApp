@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/Attach"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_photo_white_48dp"
+        android:title="Attach">
+    </item>
+
+    <item
+        android:id="@+id/a_More"
+        android:icon="@drawable/color_wheel"
+        app:showAsAction="always"
+        android:title="Color">
+        <menu>
+            <item
+                android:id="@+id/forecolor"
+                app:showAsAction="never"
+                android:title="Forecolor">
+            </item>
+            <item
+                android:id="@+id/backcolor"
+                app:showAsAction="never"
+                android:title="Background Color">
+            </item>
+        </menu>
+    </item>
 
 </menu>
